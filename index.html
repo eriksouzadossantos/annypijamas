@@ -20,49 +20,44 @@
 <header id="site-header"></header>
 
 <section class="hero-full">
-  <img class="hero-bg" src="assets/hero-wide.jpg" alt="Modelo vestindo pijama de cetim rosa da Anny Pijamas" width="1920" height="1008">
+  <picture>
+    <source media="(max-width: 800px)" srcset="assets/hero-mobile.jpg">
+    <img class="hero-bg" src="assets/hero-desktop.jpg" alt="Modelos vestindo pijamas de cetim rosa e lilás da Anny Pijamas" width="1920" height="800" fetchpriority="high">
+  </picture>
   <div class="hero-overlay"></div>
-  <div class="container hero-content">
+  <div class="hero-content">
     <p class="eyebrow">A rainha dos pijamas · Campinas/SP</p>
-    <h1>Noites mais bonitas começam com o pijama certo</h1>
-    <p class="lead">Peças femininas, delicadas e confortáveis, escolhidas com carinho. Do P ao G3, com pedidos rápidos pelo WhatsApp.</p>
-    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:24px">
+    <h1>Conforto que combina com a sua noite</h1>
+    <p class="lead">Pijamas femininos, conjuntos e baby dolls do P ao G3. Peça pelo WhatsApp.</p>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:22px">
       <a class="btn btn-primary" href="produtos.html">Ver catálogo</a>
       <a class="btn btn-whats" data-whats="Olá, Anny Pijamas! 💕 Gostaria de saber mais sobre os pijamas." href="#" target="_blank" rel="noopener">Falar no WhatsApp</a>
     </div>
   </div>
 </section>
 
+<section class="benefits"><div class="benefits-inner" id="home-benefits"></div></section>
 
-<section class="benefits">
-  <div class="benefits-inner">
-    <div class="benefit"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg><div><strong>Entrega por motoboy</strong><span>Campinas e região</span></div></div>
-    <div class="benefit"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg><div><strong>Trocas em 7 dias</strong><span>Simples e sem burocracia</span></div></div>
-    <div class="benefit"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 6h16v12H4z"/><path d="M8 10h8M8 14h5"/></svg><div><strong>Do P ao G3</strong><span>Modelagem para todos os corpos</span></div></div>
-    <div class="benefit"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12a9 9 0 0 1-13.4 7.8L3 21l1.3-4.4A9 9 0 1 1 21 12Z"/></svg><div><strong>Pedido no WhatsApp</strong><span>Atendimento personalizado</span></div></div>
-  </div>
+<section class="section container">
+  <div class="section-title"><h2>Compre por categoria</h2><span>Escolha o estilo do seu momento</span></div>
+  <div class="circles" id="home-categories"></div>
 </section>
 
 <section class="section container">
-  <div class="section-title"><h2>Compre por categoria</h2><span>Escolha o estilo perfeito para as suas noites</span></div>
-  <div class="cat-strip" id="home-categories"></div>
+  <div class="section-title"><h2>Mais vendidos</h2><span>Os favoritos das nossas clientes</span></div>
+  <div class="grid grid-4" id="home-featured"></div>
+  <p class="center" style="margin-top:28px"><a class="btn btn-outline" href="produtos.html">Ver todos os produtos</a></p>
 </section>
 
 <section class="section soft">
   <div class="container">
-    <div class="section-title"><h2>Nossa seleção dos mais vendidos</h2><span>Os favoritos das nossas clientes</span></div>
-    <div class="grid grid-4" id="home-featured"></div>
-    <p class="center" style="margin-top:28px"><a class="btn btn-primary" href="produtos.html">Ver todos os produtos</a></p>
+    <div class="section-title"><h2>Novidades</h2><span>Acabaram de chegar</span></div>
+    <div class="grid grid-4" id="home-new"></div>
   </div>
 </section>
 
 <section class="section container">
-  <div class="section-title"><h2>Novidades</h2><span>Chegou agora na Anny Pijamas</span></div>
-  <div class="grid grid-4" id="home-new"></div>
-</section>
-
-<section class="section container">
-  <div class="section-title"><h2>O que dizem nossas clientes</h2></div>
+  <div class="section-title"><h2>Depoimentos</h2><span>O que dizem nossas clientes</span></div>
   <div class="grid grid-3" id="home-reviews"></div>
 </section>
 
@@ -71,6 +66,7 @@
   <p class="muted">Atendimento personalizado pelo WhatsApp, entrega por motoboy em Campinas e região ou retirada combinada.</p>
   <a class="btn btn-whats" data-whats="Olá, Anny Pijamas! 💕 Quero fazer um pedido." href="#" target="_blank" rel="noopener">Fazer pedido agora</a>
 </section>
+
 
 <footer id="site-footer"></footer>
 <script src="data.js"></script>

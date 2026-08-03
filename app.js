@@ -13,6 +13,12 @@
 
   var ICON_BAG = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12l1 13H5L6 7Z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>';
   var ICON_WHATS = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.4 7.8L3 21l1.3-4.4A9 9 0 1 1 21 12Z"/><path d="M8.5 9.5c0 4 2 6 6 6 .8 0 1.5-.7 1.5-1.5l-2-1-1 1c-1 -.4-2.1-1.5-2.5-2.5l1-1-1-2c-.8 0-2 .2-2 1Z"/></svg>';
+  var ICON_SEARCH = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>';
+  var ICON_IG = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>';
+  var ICON_TRUCK = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7z"/><circle cx="7" cy="18" r="1.6"/><circle cx="17.5" cy="18" r="1.6"/></svg>';
+  var ICON_HEART = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7-4.3-7-9a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 4.7-7 9-7 9Z"/></svg>';
+  var ICON_SWAP = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h13l-3-3M20 15H7l3 3"/></svg>';
+  var ICON_RULER = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="8" width="20" height="8" rx="2"/><path d="M7 8v3M12 8v4M17 8v3"/></svg>';
 
   var DATA = window.STORE || { products: [], categories: [], sizeTable: [], faq: [], reviews: [], sizes: [] };
 
@@ -100,11 +106,9 @@
     return p === "" ? "index.html" : p;
   }
 
-  var ICON_SEARCH = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>';
-
   var TOPBAR = [
-    "Frete por motoboy em Campinas e região",
-    "Trocas em até 7 dias",
+    "Entrega por motoboy em Campinas e região",
+    "Até 7 dias para troca",
     "Do P ao G3",
     "Pedidos pelo WhatsApp " + SITE.whatsappDisplay,
   ];
@@ -113,34 +117,42 @@
     var page = currentPage();
     var header = document.getElementById("site-header");
     if (header) {
-      var cats = (DATA.categories || []).slice(0, 7).map(function (c) {
+      var cats = (DATA.categories || []).slice(0, 8).map(function (c) {
         return '<a href="produtos.html?categoria=' + c.slug + '">' + esc(c.name) + "</a>";
       }).join("");
+
       header.className = "header";
       header.innerHTML =
         '<div class="topbar"><div class="topbar-inner">' +
-        TOPBAR.map(function (t) { return "<span>" + esc(t) + "</span>"; }).join('<i aria-hidden="true">/</i>') +
+        TOPBAR.map(function (t) { return "<span>" + t + "</span>"; }).join('<i>/</i>') +
         "</div></div>" +
         '<div class="header-main">' +
-        '<button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>' +
-        '<form class="hsearch" action="produtos.html" method="get" role="search">' +
-        '<input type="search" name="busca" placeholder="Faça uma pesquisa..." aria-label="Buscar produtos">' +
-        '<button type="submit" aria-label="Buscar">' + ICON_SEARCH + "</button></form>" +
-        '<a class="brand" href="index.html"><img src="assets/logo.jpg" alt="Logotipo Anny Pijamas" width="150" height="70"></a>' +
-        '<div class="header-actions">' +
-        '<a class="header-whats" href="' + whatsLink("Olá, Anny Pijamas! 💕") + '" target="_blank" rel="noopener">' + ICON_WHATS + "<span>Fale conosco</span></a>" +
-        '<a class="cart-link" href="carrinho.html" aria-label="Carrinho">' + ICON_BAG + '<span class="cart-badge" id="cart-badge" hidden>0</span></a>' +
-        "</div></div>" +
-        '<nav class="mainnav"><div class="mainnav-inner">' + cats +
-        NAV.filter(function (n) { return n.href !== "index.html" && n.href !== "categorias.html"; })
-          .map(function (n) {
-            return '<a href="' + n.href + '"' + (n.href === page ? ' class="active"' : "") + ">" + n.label + "</a>";
-          }).join("") +
+          '<div class="header-side left">' +
+            '<a class="ico" href="' + SITE.instagram + '" target="_blank" rel="noopener" aria-label="Instagram">' + ICON_IG + "</a>" +
+            '<form class="searchbox" action="produtos.html" method="get" role="search">' +
+              '<input type="search" name="q" placeholder="Faça uma pesquisa..." aria-label="Buscar produtos">' +
+              '<button type="submit" aria-label="Buscar">' + ICON_SEARCH + "</button>" +
+            "</form>" +
+          "</div>" +
+          '<a class="brand" href="index.html"><img src="assets/logo.jpg" alt="Logotipo Anny Pijamas" width="150" height="72"></a>' +
+          '<div class="header-side right">' +
+            '<a class="whats-top" href="' + whatsLink("Olá, Anny Pijamas! 💕") + '" target="_blank" rel="noopener">' + ICON_WHATS + "<span>" + SITE.whatsappDisplay + "</span></a>" +
+            '<a class="cart-link" href="carrinho.html" aria-label="Carrinho">' + ICON_BAG + '<span class="cart-badge" id="cart-badge" hidden>0</span></a>' +
+            '<button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>' +
+          "</div>" +
+        "</div>" +
+        '<nav class="catnav"><div class="catnav-inner">' +
+          cats +
+          NAV.filter(function (n) { return n.href !== "index.html" && n.href !== "produtos.html" && n.href !== "categorias.html"; })
+            .map(function (n) { return '<a href="' + n.href + '"' + (n.href === page ? ' class="active"' : "") + ">" + n.label + "</a>"; })
+            .join("") +
         "</div></nav>";
+
       header.querySelector(".menu-toggle").addEventListener("click", function () {
-        header.querySelector(".mainnav").classList.toggle("open");
+        header.querySelector(".catnav").classList.toggle("open");
       });
     }
+
 
     var footer = document.getElementById("site-footer");
     if (footer) {
@@ -195,31 +207,39 @@
   /* ---------- páginas ---------- */
   function pageHome() {
     var best = DATA.products.filter(function (p) { return p.bestSeller; });
-    var featured = best.concat(DATA.products.filter(function (p) { return !p.bestSeller; })).slice(0, 8);
+    if (best.length < 4) best = DATA.products.slice();
     var g = document.getElementById("home-featured");
-    if (g) g.innerHTML = featured.map(productCard).join("");
+    if (g) g.innerHTML = best.slice(0, 8).map(productCard).join("");
+
+    var novos = DATA.products.slice().sort(function (a, b) { return b.createdAt.localeCompare(a.createdAt); });
+    var n = document.getElementById("home-new");
+    if (n) n.innerHTML = novos.slice(0, 4).map(productCard).join("");
 
     var c = document.getElementById("home-categories");
     if (c) c.innerHTML = DATA.categories.map(function (cat) {
       return (
-        '<a class="cat-tile" href="produtos.html?categoria=' + cat.slug + '">' +
-        '<span class="cat-thumb"><img src="' + cat.image + '" alt="' + esc(cat.name) + '" loading="lazy"></span>' +
-        "<strong>" + esc(cat.name) + "</strong></a>"
+        '<a class="circle-tile" href="produtos.html?categoria=' + cat.slug + '">' +
+        '<span class="circle-img"><img src="' + cat.image + '" alt="' + esc(cat.name) + '" loading="lazy"></span>' +
+        "<span>" + esc(cat.name) + "</span></a>"
       );
     }).join("");
-
-    var nw = document.getElementById("home-new");
-    if (nw) {
-      nw.innerHTML = DATA.products.slice().sort(function (a, b) {
-        return b.createdAt.localeCompare(a.createdAt);
-      }).slice(0, 4).map(productCard).join("");
-    }
 
     var r = document.getElementById("home-reviews");
     if (r) r.innerHTML = DATA.reviews.map(function (rev) {
       return '<blockquote class="panel"><p>“' + esc(rev.text) + '”</p><footer class="muted">— ' + esc(rev.author) + "</footer></blockquote>";
     }).join("");
+
+    var b = document.getElementById("home-benefits");
+    if (b) b.innerHTML = [
+      [ICON_TRUCK, "Entrega por motoboy", "Campinas e região"],
+      [ICON_SWAP, "Até 7 dias para troca", "Sem complicação"],
+      [ICON_RULER, "Do P ao G3", "Tabela de medidas completa"],
+      [ICON_HEART, "Atendimento humano", "Direto no WhatsApp"],
+    ].map(function (i) {
+      return '<div class="benefit">' + i[0] + "<div><strong>" + i[1] + "</strong><span>" + i[2] + "</span></div></div>";
+    }).join("");
   }
+
 
   function pageProducts() {
     var grid = document.getElementById("product-grid");
@@ -237,6 +257,7 @@
 
     if (qs("categoria")) fCat.value = qs("categoria");
     if (qs("busca")) fSearch.value = qs("busca");
+    if (qs("q")) fSearch.value = qs("q");
 
     function apply() {
       var list = DATA.products.slice();
