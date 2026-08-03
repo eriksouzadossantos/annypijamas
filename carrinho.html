@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Carrinho e Pedido pelo WhatsApp | Anny Pijamas</title>
+<meta name="description" content="Revise os itens do seu carrinho, escolha entrega por motoboy ou retirada e finalize o pedido pelo WhatsApp da Anny Pijamas.">
+<meta property="og:title" content="Carrinho | Anny Pijamas">
+<meta property="og:description" content="Finalize seu pedido pelo WhatsApp com entrega por motoboy ou retirada.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header id="site-header"></header>
+<main class="container section">
+  <h1>Seu carrinho</h1>
+  <div class="grid grid-2" style="align-items:start;margin-top:20px">
+    <div id="cart-list"></div>
+    <aside id="cart-summary" class="panel" hidden>
+      <h2 style="font-size:1.4rem">Resumo</h2>
+      <p style="display:flex;justify-content:space-between"><span>Total</span><strong class="price" id="cart-total">R$ 0,00</strong></p>
+      <p class="muted" style="font-size:.85rem">Pagamento e frete são combinados diretamente pelo WhatsApp.</p>
+      <form id="checkout-form">
+        <div class="field"><label for="nome">Nome completo</label>
+          <input type="text" id="nome" name="nome" required></div>
+        <div class="field"><label for="entrega">Forma de entrega</label>
+          <select id="entrega" name="entrega">
+            <option value="retirada">Retirada combinada</option>
+            <option value="motoboy">Entrega por motoboy</option>
+          </select></div>
+        <div id="endereco-box" hidden>
+          <div class="field"><label for="endereco">Endereço e número</label>
+            <input type="text" id="endereco" name="endereco"></div>
+          <div class="field"><label for="bairro">Bairro</label>
+            <input type="text" id="bairro" name="bairro"></div>
+          <div class="field"><label for="cidade">Cidade</label>
+            <input type="text" id="cidade" name="cidade" value="Campinas/SP"></div>
+        </div>
+        <div class="field"><label for="obs">Observações (opcional)</label>
+          <textarea id="obs" name="obs"></textarea></div>
+        <button class="btn btn-whats" style="width:100%" type="submit">Finalizar pedido no WhatsApp</button>
+      </form>
+    </aside>
+  </div>
+</main>
+<footer id="site-footer"></footer>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

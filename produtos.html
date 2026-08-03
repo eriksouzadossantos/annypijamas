@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Catálogo de Pijamas Femininos | Anny Pijamas Campinas</title>
+<meta name="description" content="Catálogo completo de pijamas femininos: curtos, longos, de inverno, plus size, maternidade, infantis e baby dolls. Do P ao G3, pedidos pelo WhatsApp.">
+<meta property="og:title" content="Catálogo de Pijamas | Anny Pijamas">
+<meta property="og:description" content="Pijamas curtos, longos, de inverno, plus size e infantis. Do P ao G3.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/logo.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header id="site-header"></header>
+<main class="container section">
+  <h1>Produtos</h1>
+  <p class="muted" id="result-count"></p>
+  <div class="filters" style="margin-top:18px">
+    <input type="search" id="f-search" placeholder="Buscar produto...">
+    <select id="f-cat"></select>
+    <select id="f-size"></select>
+    <select id="f-sort">
+      <option value="">Ordenar por</option>
+      <option value="price-asc">Menor preço</option>
+      <option value="price-desc">Maior preço</option>
+      <option value="new">Novidades</option>
+    </select>
+  </div>
+  <div class="grid grid-4" id="product-grid"></div>
+</main>
+<footer id="site-footer"></footer>
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
