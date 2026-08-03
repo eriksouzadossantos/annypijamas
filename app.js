@@ -100,25 +100,45 @@
     return p === "" ? "index.html" : p;
   }
 
+  var ICON_SEARCH = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>';
+
+  var TOPBAR = [
+    "Frete por motoboy em Campinas e região",
+    "Trocas em até 7 dias",
+    "Do P ao G3",
+    "Pedidos pelo WhatsApp " + SITE.whatsappDisplay,
+  ];
+
   function renderChrome() {
     var page = currentPage();
     var header = document.getElementById("site-header");
     if (header) {
+      var cats = (DATA.categories || []).slice(0, 7).map(function (c) {
+        return '<a href="produtos.html?categoria=' + c.slug + '">' + esc(c.name) + "</a>";
+      }).join("");
       header.className = "header";
       header.innerHTML =
-        '<div class="header-inner">' +
-        '<a class="brand" href="index.html"><img src="assets/logo.jpg" alt="Logotipo Anny Pijamas" width="44" height="44"><span>Anny Pijamas</span></a>' +
+        '<div class="topbar"><div class="topbar-inner">' +
+        TOPBAR.map(function (t) { return "<span>" + esc(t) + "</span>"; }).join('<i aria-hidden="true">/</i>') +
+        "</div></div>" +
+        '<div class="header-main">' +
         '<button class="menu-toggle" aria-label="Abrir menu">&#9776;</button>' +
-        '<nav class="nav">' +
-        NAV.map(function (n) {
-          return '<a href="' + n.href + '"' + (n.href === page ? ' class="active"' : "") + ">" + n.label + "</a>";
-        }).join("") +
-        "</nav>" +
+        '<form class="hsearch" action="produtos.html" method="get" role="search">' +
+        '<input type="search" name="busca" placeholder="Faça uma pesquisa..." aria-label="Buscar produtos">' +
+        '<button type="submit" aria-label="Buscar">' + ICON_SEARCH + "</button></form>" +
+        '<a class="brand" href="index.html"><img src="assets/logo.jpg" alt="Logotipo Anny Pijamas" width="150" height="70"></a>' +
         '<div class="header-actions">' +
+        '<a class="header-whats" href="' + whatsLink("Olá, Anny Pijamas! 💕") + '" target="_blank" rel="noopener">' + ICON_WHATS + "<span>Fale conosco</span></a>" +
         '<a class="cart-link" href="carrinho.html" aria-label="Carrinho">' + ICON_BAG + '<span class="cart-badge" id="cart-badge" hidden>0</span></a>' +
-        "</div></div>";
+        "</div></div>" +
+        '<nav class="mainnav"><div class="mainnav-inner">' + cats +
+        NAV.filter(function (n) { return n.href !== "index.html" && n.href !== "categorias.html"; })
+          .map(function (n) {
+            return '<a href="' + n.href + '"' + (n.href === page ? ' class="active"' : "") + ">" + n.label + "</a>";
+          }).join("") +
+        "</div></nav>";
       header.querySelector(".menu-toggle").addEventListener("click", function () {
-        header.querySelector(".nav").classList.toggle("open");
+        header.querySelector(".mainnav").classList.toggle("open");
       });
     }
 
@@ -174,19 +194,26 @@
 
   /* ---------- páginas ---------- */
   function pageHome() {
-    var featured = DATA.products.filter(function (p) { return p.bestSeller; }).slice(0, 4);
-    if (featured.length < 4) featured = DATA.products.slice(0, 4);
+    var best = DATA.products.filter(function (p) { return p.bestSeller; });
+    var featured = best.concat(DATA.products.filter(function (p) { return !p.bestSeller; })).slice(0, 8);
     var g = document.getElementById("home-featured");
     if (g) g.innerHTML = featured.map(productCard).join("");
 
     var c = document.getElementById("home-categories");
     if (c) c.innerHTML = DATA.categories.map(function (cat) {
       return (
-        '<a class="card" href="produtos.html?categoria=' + cat.slug + '">' +
-        '<div class="thumb"><img src="' + cat.image + '" alt="' + esc(cat.name) + '" loading="lazy"></div>' +
-        '<div class="card-body"><h3>' + esc(cat.name) + "</h3></div></a>"
+        '<a class="cat-tile" href="produtos.html?categoria=' + cat.slug + '">' +
+        '<span class="cat-thumb"><img src="' + cat.image + '" alt="' + esc(cat.name) + '" loading="lazy"></span>' +
+        "<strong>" + esc(cat.name) + "</strong></a>"
       );
     }).join("");
+
+    var nw = document.getElementById("home-new");
+    if (nw) {
+      nw.innerHTML = DATA.products.slice().sort(function (a, b) {
+        return b.createdAt.localeCompare(a.createdAt);
+      }).slice(0, 4).map(productCard).join("");
+    }
 
     var r = document.getElementById("home-reviews");
     if (r) r.innerHTML = DATA.reviews.map(function (rev) {
